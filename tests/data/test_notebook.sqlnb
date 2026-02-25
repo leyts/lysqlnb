@@ -1,0 +1,17 @@
+cells:
+  - kind: 1
+    value: "# This is Markdown."
+    languageId: markdown
+  - kind: 2
+    value: |-
+      -- This is SQL.
+      SELECT
+          department_id,
+          AVG(salary) AS avg_salary
+      FROM
+          employees
+      GROUP BY
+          department_id
+      HAVING
+          AVG(salary) > 5000;
+    languageId: oracle-sql
