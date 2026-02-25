@@ -6,35 +6,34 @@ readme = "README.md"
 license = "MIT"
 license-files = ["LICENCE"]
 authors = [
-    { name = "Leyton Addison-Roach", email = "git@laddisonroach.com" }
+    { name = "Leyton Addison-Roach", email = "git@laddisonroach.com" },
 ]
 requires-python = ">=3.14"
 dependencies = [
-    "cyclopts>=4.5.0",
     "pydantic>=2.12.5",
     "pyyaml>=6.0.3",
 ]
 
 [dependency-groups]
 dev = [
-    "pytest>=8.0.0",
-    "ruff==0.14.*",
+    "ruff>=0.15.2",
+    "ty>=0.0.18",
 ]
 
-[project.scripts]
-lysqlnb = "lysqlnb:main"
-
 [build-system]
-requires = ["uv_build>=0.9.22,<0.10.0"]
+requires = ["uv_build>=0.10.4,<0.11.0"]
 build-backend = "uv_build"
 
 [tool.ruff]
 line-length = 79
 
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 20
+
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "D1",
     "W191",
     "E111",
     "E114",
@@ -50,16 +49,5 @@ ignore = [
     "TD",
 ]
 
-[tool.ruff.lint.per-file-ignores]
-"tests/**/*.py" = [
-    "PLR2004",
-    "S101",
-    "S603",
-]
-
 [tool.ruff.lint.pydocstyle]
 convention = "google"
-
-[tool.ruff.format]
-docstring-code-format = true
-docstring-code-line-length = 20
