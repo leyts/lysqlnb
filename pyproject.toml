@@ -3,6 +3,8 @@ name = "lysqlnb"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENCE"]
 authors = [
     { name = "Leyton Addison-Roach", email = "git@laddisonroach.com" }
 ]
