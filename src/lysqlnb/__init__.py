@@ -2,16 +2,16 @@
 
 from lysqlnb.exceptions import NotebookParseError
 from lysqlnb.models import (
-    NotebookCellData,
+    Notebook,
+    NotebookCell,
     NotebookCellKind,
     NotebookCellLanguage,
-    NotebookData,
 )
 
 __all__ = [
-    "NotebookCellData",
+    "Notebook",
+    "NotebookCell",
     "NotebookCellKind",
     "NotebookCellLanguage",
-    "NotebookData",
     "NotebookParseError",
 ]

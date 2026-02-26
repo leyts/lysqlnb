@@ -36,7 +36,7 @@ class NotebookCellLanguage(StrEnum):
     ORACLE_SQL = "oracle-sql"
 
 
-class NotebookCellData(BaseModel):
+class NotebookCell(BaseModel):
     """Raw representation of a notebook cell.
 
     Attributes:
@@ -54,7 +54,7 @@ class NotebookCellData(BaseModel):
     language_id: NotebookCellLanguage = Field(alias="languageId")
 
 
-class NotebookData(BaseModel):
+class Notebook(BaseModel):
     """Raw representation of a notebook.
 
     Attributes:
@@ -63,10 +63,10 @@ class NotebookData(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    cells: list[NotebookCellData]
+    cells: list[NotebookCell]
 
     @classmethod
-    def from_file(cls, path: Path) -> NotebookData:
+    def from_file(cls, path: Path) -> Notebook:
         """Create a notebook from a file.
 
         Args:
