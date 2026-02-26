@@ -40,10 +40,10 @@ class NotebookCell(BaseModel):
     """Raw representation of a notebook cell.
 
     Attributes:
-        kind: The kind of cell data.
-        value: The source value of this cell data — either
-            source code or formatted text.
-        language_id: The language identifier of the source
+        kind: Kind of cell data.
+        value: Source value of this cell data — either
+            source code or markup text.
+        language_id: Language identifier of the source
             value of this cell data.
     """
 
@@ -62,7 +62,7 @@ class Notebook(BaseModel):
     """Raw representation of a notebook.
 
     Attributes:
-        cells: The cell data of this notebook.
+        cells: Cell data of this notebook.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -77,7 +77,7 @@ class Notebook(BaseModel):
             path: Path to the notebook file.
 
         Returns:
-            A validated notebook data object.
+            Validated notebook data object.
 
         Raises:
             NotebookParseError: If the file contains invalid YAML or
