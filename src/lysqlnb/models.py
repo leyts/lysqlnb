@@ -1,15 +1,8 @@
-"""Notebook data models and parsing."""
+"""Notebook data models."""
 
 from enum import IntEnum, StrEnum
-from typing import TYPE_CHECKING, Any
 
-import yaml
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
-
-from lysqlnb.exceptions import NotebookParseError
-
-if TYPE_CHECKING:
-    from pathlib import Path
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class NotebookCellKind(IntEnum):
@@ -68,29 +61,3 @@ class Notebook(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     cells: list[NotebookCell]
-
-    @classmethod
-    def from_file(cls, path: Path) -> Notebook:
-        """Create a notebook from a file.
-
-        Args:
-            path: Path to the notebook file.
-
-        Returns:
-            Validated notebook data object.
-
-        Raises:
-            NotebookParseError: If the file contains invalid YAML or
-                does not conform to the notebook schema.
-        """
-        try:
-            raw: Any = yaml.safe_load(path.read_text(encoding="utf-8"))
-        except yaml.YAMLError as e:
-            msg = f"Invalid YAML: {e}"
-            raise NotebookParseError(msg) from e
-
-        try:
-            return cls.model_validate(raw)
-        except ValidationError as e:
-            msg = f"Invalid notebook structure: {e}"
-            raise NotebookParseError(msg) from e

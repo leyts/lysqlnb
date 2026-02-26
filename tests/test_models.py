@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
+from lysqlnb import read
 from lysqlnb.models import Notebook, NotebookCellKind, NotebookCellLanguage
 
 if TYPE_CHECKING:
@@ -10,7 +11,7 @@ if TYPE_CHECKING:
 
 @pytest.fixture
 def notebook(shared_datadir: Path):
-    return Notebook.from_file(shared_datadir / "test_notebook.sqlnb")
+    return read(shared_datadir / "test_notebook.sqlnb")
 
 
 def test_notebook_cell_count(notebook: Notebook):
@@ -39,20 +40,18 @@ def test_notebook_cell_value(notebook: Notebook):
 
 
 def test_notebook_cell_value_blank(shared_datadir: Path):
-    notebook: Notebook = Notebook.from_file(
-        shared_datadir / "test_notebook_blank_cell.sqlnb"
-    )
-    assert notebook.cells[0].value == "# The cell below is blank."
-    assert notebook.cells[1].value == ""
-    assert notebook.cells[2].value == "# The cell above is blank."
+    nb: Notebook = read(shared_datadir / "test_notebook_blank_cell.sqlnb")
+    assert nb.cells[0].value == "# The cell below is blank."
+    assert nb.cells[1].value == ""
+    assert nb.cells[2].value == "# The cell above is blank."
 
 
 def test_notebook_cell_value_line_endings(shared_datadir: Path):
-    notebook: Notebook = Notebook.from_file(
-        shared_datadir / "test_notebook_line_endings.sqlnb"
+    nb: Notebook = read(
+        shared_datadir / "test_notebook_line_endings.sqlnb",
     )
-    assert notebook.cells[0].value == "# Heading\r\nSome text.  \r\nMore text."
-    assert notebook.cells[1].value == "SELECT 1\r\nFROM dual;"
+    assert nb.cells[0].value == "# Heading\r\nSome text.  \r\nMore text."
+    assert nb.cells[1].value == "SELECT 1\r\nFROM dual;"
 
 
 def test_notebook_cell_language(notebook: Notebook):
