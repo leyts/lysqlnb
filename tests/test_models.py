@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 @pytest.fixture
-def notebook(shared_datadir: Path) -> Notebook:
+def notebook(shared_datadir: Path):
     return Notebook.from_file(shared_datadir / "test_notebook.sqlnb")
 
 
