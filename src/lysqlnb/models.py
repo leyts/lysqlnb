@@ -53,6 +53,10 @@ class NotebookCell(BaseModel):
     value: str
     language_id: NotebookCellLanguage = Field(alias="languageId")
 
+    def __str__(self) -> str:
+        """Return the cell's value as its string representation."""
+        return self.value
+
 
 class Notebook(BaseModel):
     """Raw representation of a notebook.
