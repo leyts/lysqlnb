@@ -9,10 +9,23 @@ authors = [
     { name = "Leyton Addison-Roach", email = "git@laddisonroach.com" },
 ]
 requires-python = ">=3.14"
+keywords = ["notebook", "oracle", "parser", "sql", "yaml"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
 dependencies = [
     "pydantic>=2.12.5",
     "pyyaml>=6.0.3",
 ]
+
+[project.urls]
+Repository = "https://github.com/leyts/lysqlnb"
+Issues = "https://github.com/leyts/lysqlnb/issues"
 
 [dependency-groups]
 dev = [
