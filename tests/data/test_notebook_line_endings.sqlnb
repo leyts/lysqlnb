@@ -1,0 +1,11 @@
+cells:
+  - kind: 1
+    value: "# Heading\r
+
+      Some text.  \r
+
+      More text."
+    languageId: markdown
+  - kind: 2
+    value: "SELECT 1\r\nFROM dual;"
+    languageId: oracle-sql

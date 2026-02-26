@@ -47,6 +47,14 @@ def test_notebook_cell_value_blank(shared_datadir: Path):
     assert notebook.cells[2].value == "# The cell above is blank."
 
 
+def test_notebook_cell_value_line_endings(shared_datadir: Path):
+    notebook: NotebookData = NotebookData.from_file(
+        shared_datadir / "test_notebook_line_endings.sqlnb"
+    )
+    assert notebook.cells[0].value == "# Heading\r\nSome text.  \r\nMore text."
+    assert notebook.cells[1].value == "SELECT 1\r\nFROM dual;"
+
+
 def test_notebook_cell_language(notebook: NotebookData):
     assert notebook.cells[0].language_id == NotebookCellLanguage.MARKDOWN
     assert notebook.cells[1].language_id == NotebookCellLanguage.ORACLE_SQL
