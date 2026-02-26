@@ -1,32 +1,92 @@
-from enum import IntEnum, StrEnum, auto
+"""Notebook data models and parsing."""
 
-from pydantic import BaseModel, ConfigDict, Field
+from enum import IntEnum, StrEnum
+from typing import TYPE_CHECKING, Any
+
+import yaml
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
+
+from lysqlnb.exceptions import NotebookParseError
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
-class CellKind(IntEnum):
-    """Notebook cell types matching VS Code's notebook format."""
+class NotebookCellKind(IntEnum):
+    """A notebook cell kind.
 
-    MARKDOWN = 1
+    Attributes:
+        MARKUP: Formatted source that is used for display.
+        CODE: Source that can be executed and that produces output.
+    """
+
+    MARKUP = 1
     CODE = 2
 
 
-class TrailingNewlines(StrEnum):
-    """Trailing newline normalisation modes."""
+class NotebookCellLanguage(StrEnum):
+    """Language identifier for a notebook cell.
 
-    PRESERVE = auto()
-    NONE = auto()
-    ONE = auto()
+    Attributes:
+        MARKDOWN: Markdown markup language.
+        ORACLE_SQL: Oracle SQL dialect.
+    """
+
+    MARKDOWN = "markdown"
+    ORACLE_SQL = "oracle-sql"
 
 
-class Cell(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+class NotebookCellData(BaseModel):
+    """Raw representation of a notebook cell.
 
-    kind: CellKind
+    Attributes:
+        kind: The kind of cell data.
+        value: The source value of this cell data — either
+            source code or formatted text.
+        language_id: The language identifier of the source
+            value of this cell data.
+    """
+
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+
+    kind: NotebookCellKind
     value: str
-    language_id: str = Field(alias="languageId")
+    language_id: NotebookCellLanguage = Field(alias="languageId")
 
 
-class Notebook(BaseModel):
+class NotebookData(BaseModel):
+    """Raw representation of a notebook.
+
+    Attributes:
+        cells: The cell data of this notebook.
+    """
+
     model_config = ConfigDict(extra="forbid")
 
-    cells: list[Cell]
+    cells: list[NotebookCellData]
+
+    @classmethod
+    def from_file(cls, path: Path) -> NotebookData:
+        """Create a notebook from a file.
+
+        Args:
+            path: Path to the notebook file.
+
+        Returns:
+            A validated notebook data object.
+
+        Raises:
+            NotebookParseError: If the file contains invalid YAML or
+                does not conform to the notebook schema.
+        """
+        try:
+            raw: Any = yaml.safe_load(path.read_text(encoding="utf-8"))
+        except yaml.YAMLError as e:
+            msg = f"Invalid YAML: {e}"
+            raise NotebookParseError(msg) from e
+
+        try:
+            return cls.model_validate(raw)
+        except ValidationError as e:
+            msg = f"Invalid notebook structure: {e}"
+            raise NotebookParseError(msg) from e
