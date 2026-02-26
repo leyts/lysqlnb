@@ -1,4 +1,4 @@
-"""lysqlnb — small library for parsing SQL notebook files."""
+"""lysqlnb — a library for reading and validating SQL notebook files."""
 
 from lysqlnb.exceptions import NotebookParseError
 from lysqlnb.models import (
