@@ -21,7 +21,7 @@ The data models are based on the VS Code [NotebookSerializer API](https://code.v
 >>> from pathlib import Path
 >>> from lysqlnb import NotebookData
 >>> notebook = NotebookData.from_file(Path("path/to/notebook.sqlnb"))
->>> print(notebook.model_dump_json(indent=2))
+>>> notebook.model_dump_json(indent=2)
 {
   "cells": [
     {
