@@ -3,13 +3,13 @@
 from typing import TYPE_CHECKING
 
 from lysqlnb.exceptions import NotebookParseError
+from lysqlnb.loader import loads as _loads
 from lysqlnb.models import (
     Notebook,
     NotebookCell,
     NotebookCellKind,
     NotebookCellLanguage,
 )
-from lysqlnb.reader import reads as _reads
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -20,16 +20,16 @@ __all__ = [
     "NotebookCellKind",
     "NotebookCellLanguage",
     "NotebookParseError",
-    "read",
-    "reads",
+    "load",
+    "loads",
 ]
 
 
-def reads(s: str) -> Notebook:
-    """Read a notebook from a string and return the Notebook object.
+def loads(s: str) -> Notebook:
+    """Load a notebook from a string.
 
     Args:
-        s: String to read the notebook from.
+        s: String to load the notebook from.
 
     Returns:
         Notebook data object.
@@ -38,11 +38,11 @@ def reads(s: str) -> Notebook:
         NotebookParseError: If the string contains invalid YAML or
             does not conform to the notebook schema.
     """
-    return _reads(s)
+    return _loads(s)
 
 
-def read(path: Path) -> Notebook:
-    """Read a notebook from a file path.
+def load(path: Path) -> Notebook:
+    """Load a notebook from a file path.
 
     Args:
         path: Path to the notebook file.
@@ -54,4 +54,4 @@ def read(path: Path) -> Notebook:
         NotebookParseError: If the file contains invalid YAML or
             does not conform to the notebook schema.
     """
-    return reads(path.read_text(encoding="utf-8"))
+    return loads(path.read_text(encoding="utf-8"))

@@ -9,11 +9,11 @@ from lysqlnb.exceptions import NotebookParseError
 from lysqlnb.models import Notebook
 
 
-def reads(s: str) -> Notebook:
-    """Read a raw YAML string into a notebook.
+def loads(s: str) -> Notebook:
+    """Load a raw YAML string into a notebook.
 
     Args:
-        s: YAML string to read.
+        s: YAML string to load.
 
     Returns:
         Notebook data object.
