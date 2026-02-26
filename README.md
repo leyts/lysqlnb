@@ -31,7 +31,7 @@ The data models are based on the VS Code [NotebookSerializer API](https://code.v
     },
     {
       "kind": 2,
-      "value": "-- This is SQL.\nSELECT\n    ...",
+      "value": "SELECT * FROM departments;",
       "language_id": "oracle-sql"
     }
   ]
