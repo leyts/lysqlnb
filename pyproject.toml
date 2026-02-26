@@ -1,6 +1,6 @@
 [project]
 name = "lysqlnb"
-version = "0.2.0"
+version = "0.3.0"
 description = "A library for reading and validating SQL notebook files."
 readme = "README.md"
 license = "MIT"
