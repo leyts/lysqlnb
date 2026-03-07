@@ -1,7 +1,7 @@
 [project]
 name = "lysqlnb"
 version = "0.3.0"
-description = "A library for reading and validating SQL notebook files."
+description = "A library for reading and validating Oracle SQL notebooks."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENCE"]
@@ -9,7 +9,7 @@ authors = [
     { name = "Leyton Addison-Roach", email = "git@laddisonroach.com" },
 ]
 requires-python = ">=3.14"
-keywords = ["notebook", "sql"]
+keywords = ["notebook", "oracle", "sql"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",

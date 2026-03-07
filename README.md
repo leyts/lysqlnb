@@ -1,6 +1,6 @@
 # lysqlnb
 
-A library for reading and validating SQL notebook files (`.sqlnb`).
+A Python library for reading and validating Oracle SQL notebooks (`.sqlnb`).
 
 > [!WARNING]
 > This project is a work in progress and is not yet ready for use. The API is unstable and subject to breaking changes.
