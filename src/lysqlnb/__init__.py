@@ -1,4 +1,4 @@
-"""lysqlnb — a library for reading and validating SQL notebook files."""
+"""lysqlnb package."""
 
 from typing import TYPE_CHECKING
 
