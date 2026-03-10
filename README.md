@@ -1,5 +1,10 @@
 # lysqlnb
 
+![PyPI - Version](https://img.shields.io/pypi/v/lysqlnb)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/lysqlnb)
+[![Pydantic v2](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json)](https://pydantic.dev/)
+![PyPI - License](https://img.shields.io/pypi/l/lysqlnb)
+
 A Python library for reading and validating Oracle SQL notebooks (`.sqlnb`).
 
 > [!WARNING]
