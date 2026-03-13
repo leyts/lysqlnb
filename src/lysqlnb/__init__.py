@@ -2,14 +2,14 @@
 
 from typing import TYPE_CHECKING
 
-from lysqlnb.exceptions import NotebookParseError
-from lysqlnb.loader import loads as _loads
-from lysqlnb.models import (
+from lysqlnb._loader import _loads
+from lysqlnb._models import (
     Notebook,
     NotebookCell,
     NotebookCellKind,
     NotebookCellLanguage,
 )
+from lysqlnb.exceptions import NotebookParseError
 
 if TYPE_CHECKING:
     from pathlib import Path

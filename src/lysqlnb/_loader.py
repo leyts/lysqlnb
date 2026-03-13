@@ -5,11 +5,11 @@ from typing import Any
 import yaml
 from pydantic import ValidationError
 
+from lysqlnb._models import Notebook
 from lysqlnb.exceptions import NotebookParseError
-from lysqlnb.models import Notebook
 
 
-def loads(s: str) -> Notebook:
+def _loads(s: str) -> Notebook:
     """Load a raw YAML string into a notebook.
 
     Args:

@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from lysqlnb import load
-from lysqlnb.models import Notebook, NotebookCellKind, NotebookCellLanguage
+from lysqlnb._models import Notebook, NotebookCellKind, NotebookCellLanguage
 
 if TYPE_CHECKING:
     from pathlib import Path
